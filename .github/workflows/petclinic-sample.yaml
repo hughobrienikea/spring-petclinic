@@ -82,7 +82,7 @@ jobs:
   ## It outputs the image tag and image URL for the next step to use when deploying to the OpenShift cluster.
   build-push-image:
     name: Build and Push to Quay
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     needs: compile
     outputs:
       registry-path: ${{ steps.push-to-quay.outputs.registry-path }}
@@ -127,7 +127,7 @@ jobs:
   ## It can then run any integration tests before deleting the resources that were created.
   openshift-deploy:
     name: Deploy on OpenShift
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     needs: [ build-push-image, compile ]
     env:
       IMAGE_PATH: ${{ needs.build-push-image.outputs.registry-path }}

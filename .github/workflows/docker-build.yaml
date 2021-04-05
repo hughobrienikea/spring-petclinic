@@ -9,7 +9,7 @@ jobs:
   ## The compile job compiles the application into a jar, and uploads it as an artifact for the next job to use.
   compile:
     name: Compile
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     outputs:
       jarname: ${{ steps.get-jarname.outputs.jarname }}
       commit_sha: ${{ steps.commit-data.outputs.short_sha }}
@@ -77,7 +77,7 @@ jobs:
   ## It outputs the image tag and image URL for the next step to use when deploying to the OpenShift cluster.
   build-push-image:
     name: Docker Build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     needs: compile
     env:
       JAR_NAME: ${{ needs.compile.outputs.jarname }}

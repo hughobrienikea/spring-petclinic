@@ -12,7 +12,7 @@ env:
 
 jobs:
   test-s2i-job:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     name: S2I build and push
     steps:
       # Checkout spring petclinic repository
