@@ -1,13 +1,13 @@
 # This example workflow will build container image
 # of the application using source to image build
-# startegy and push the image to quay.io (Image registry)
+# startegy and push the image to docker.io (Image registry)
 
 name: S2I build and push
 on: [push, workflow_dispatch, pull_request]
 env:
-  IMAGE_REGISTRY: quay.io
-  REGISTRY_USER: jduimovich0
-  APP_NAME: petclinic
+  IMAGE_REGISTRY: docker.io
+  REGISTRY_USER: huobr1
+  APP_NAME: spring-petclinic
   IMAGE_TAGS: latest
 
 jobs:
@@ -28,8 +28,8 @@ jobs:
           builder_image: 'registry.access.redhat.com/openjdk/openjdk-11-rhel7'
           image_name: ${{ env.APP_NAME }}
 
-      # Push Image to Quay registry
-      - name: Push To Quay Action
+      # Push Image to Docker registry
+      - name: Push To Docker Action
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ env.APP_NAME }}

@@ -2,10 +2,10 @@ name: OpenShift Pet Clinic Workflow
 on: [ push, workflow_dispatch ]
 
 env:
-  REGISTRY_USER: hobrien
+  REGISTRY_USER: huobr1
   IMAGE_REGISTRY: docker.io
   TEST_NAMESPACE: sts-dev
-  APP_NAME: petclinic
+  APP_NAME: spring-petclinic
   APP_PORT: 8080
   TEAR_DOWN: false
 
@@ -81,11 +81,11 @@ jobs:
   ## and pushes it to an image registry.
   ## It outputs the image tag and image URL for the next step to use when deploying to the OpenShift cluster.
   build-push-image:
-    name: Build and Push to Quay
+    name: Build and Push to Docker
     runs-on: ubuntu-18.04
     needs: compile
     outputs:
-      registry-path: ${{ steps.push-to-quay.outputs.registry-path }}
+      registry-path: ${{ steps.push-to-docker.outputs.registry-path }}
     env:
       JAR_NAME: ${{ needs.compile.outputs.jarname }}
       IMAGE_TAGS: latest ${{ needs.compile.outputs.commit_sha }}
@@ -112,8 +112,8 @@ jobs:
           port: ${{ env.CONTAINER_PORT }}
 
       # Push the built image to our image registry so it can be pulled into the OpenShift cluster.
-      - name: Push to Quay
-        id: push-to-quay
+      - name: Push to Docker
+        id: push-to-docker
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-image.outputs.image }}

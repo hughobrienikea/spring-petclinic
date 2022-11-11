@@ -1,7 +1,7 @@
 tag: latest
 appName: petclinic
 appPort: 8080
-image: quay.io/tetchell/petclinic
+image: docker.io/tetchell/petclinic
 replicas: 1
 
 # note, the name of the mysql db itself is just 'petclinic' - see the secret for details.
